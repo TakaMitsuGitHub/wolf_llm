@@ -10,6 +10,7 @@ from demo_novel_game.scenario.scenario_llm import scenario_craeted
 
 class ChapterGroupView(APIView):
     def post(self, request):
+        print(f"demo_2")
         print(f"request : {request}")
         # chapter_id = request.data.get("ChapterId")
         group_id = request.data.get("GroupId")
