@@ -1,0 +1,39 @@
+{
+  "ChapterId": "chapter_2_a",
+  "Title": "後編：悔しいパン屋",
+  "RequirementFlags": { "パンを買える": false },
+  "Groups": [
+    {
+      "GroupId": "chapter_2_a---group_0",
+      "Type": "text",
+      "ChangeFlags": {},
+      "Next": {},
+      "Steps": [
+        {
+          "StepId": "step_0",
+          "Speaker": "narration",
+          "Text": "パン屋に到着",
+          "BackgroundImage": "novel_bg3.png"
+        },
+        {
+          "StepId": "step_1",
+          "Speaker": "パン屋店主",
+          "Text": "「いつものクロワッサンでいいかい？」",
+          "BackgroundImage": "novel_bg3.png"
+        },
+        {
+          "StepId": "step_2",
+          "Speaker": "主人公",
+          "Text": "「…あれ、お金が足りなかった…」",
+          "BackgroundImage": "novel_bg3.png"
+        },
+        {
+          "StepId": "step_3",
+          "Speaker": "narration",
+          "Text": "せっかくの楽しみが、ほんの数十円の差で叶わなかった。",
+          "BackgroundImage": "novel_bg3.png"
+        }
+      ]
+    }
+  ]
+}

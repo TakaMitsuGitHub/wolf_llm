@@ -1,0 +1,42 @@
+.selector-container {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selector-window {
+  width: min(90vw, 90vh * 16 / 9);
+  aspect-ratio: 16 / 9;
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 2em;
+  border: 4px solid white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.selector-window h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.selector-window button {
+  display: block;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  color: #111;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.selector-window button:hover {
+  background-color: #ddd;
+}

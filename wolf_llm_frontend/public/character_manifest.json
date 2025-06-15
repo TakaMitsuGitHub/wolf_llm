@@ -1,0 +1,18 @@
+{
+    "hero": {
+      "name": "主人公",
+      "expressions": {
+        "neutral": "/char/hero_neutral.png",
+        "happy": "/char/hero_happy.png",
+        "angry": "/char/hero_angry.png"
+      }
+    },
+    "merchant": {
+      "name": "果物店店主",
+      "expressions": {
+        "smile": "/char/merchant_smile.png",
+        "serious": "/char/merchant_serious.png"
+      }
+    }
+  }
+  

@@ -1,0 +1,39 @@
+{
+  "ChapterId": "chapter_2_b",
+  "Title": "後編：幸せの一口",
+  "RequirementFlags": { "パンを買える": true},
+  "Groups": [
+    {
+      "GroupId": "chapter_2_b---group_0",
+      "Type": "text",
+      "ChangeFlags": { "aaa": true, "bbb": false },
+      "Next": {},
+      "Steps": [
+        {
+          "StepId": "step_0",
+          "Speaker": "narration",
+          "Text": "パン屋に到着",
+          "BackgroundImage": "novel_bg3.png"
+        },
+        {
+          "StepId": "step_1",
+          "Speaker": "パン屋店主",
+          "Text": "「いつものクロワッサンでいいかい？」",
+          "BackgroundImage": "novel_bg3.png"
+        },
+        {
+          "StepId": "step_2",
+          "Speaker": "主人公",
+          "Text": "「はい、お願いします！」",
+          "BackgroundImage": "novel_bg3.png"
+        },
+        {
+          "StepId": "step_3",
+          "Speaker": "narration",
+          "Text": "熱々のクロワッサンを頬張ると、バターの香りとサクサク感が体に染み渡った。",
+          "BackgroundImage": "novel_bg3.png"
+        }
+      ]
+    }
+  ]
+}

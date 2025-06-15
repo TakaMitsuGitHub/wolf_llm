@@ -1,0 +1,168 @@
+{
+  "ChapterId": "chapter_1",
+  "Title": "前編：果物店の出会い",
+  "RelatedFlags": ["パンを買える"],
+  "RequirementFlags": {},
+  "Groups": [
+    {
+      "GroupId": "chapter_1---group_1",
+      "Type": "text",
+      "ChangeFlags": { "パンを買える": "true" },
+      "Next": { "NextGroupId": "chapter_1---group_2" },
+      "Steps": [
+        {
+          "StepId": "step_1",
+          "Speaker": "主人公",
+          "Text": "「さて、今日はふわふわの焼きたてパンを買いに行こう」",
+          "BackgroundImage": "novel_bg1.png"
+        },
+        {
+          "StepId": "step_2",
+          "Speaker": "narration",
+          "Text": "朝の光が市場の通りを温かく照らし、人々のざわめきが心地よく耳に届く。",
+          "BackgroundImage": "novel_bg1.png"
+        }
+      ]
+    },
+    {
+      "GroupId": "chapter_1---group_2",
+      "Type": "text",
+      "ChangeFlags": {},
+      "Next": { "NextGroupId": "chapter_1---group_3" },
+      "Steps": [
+        {
+          "StepId": "step_1",
+          "Speaker": "果物店店主",
+          "Text": "「おっ、兄さん！ 新鮮なリンゴはいかがかな？ 甘酸っぱくて朝食にぴったりだよ」",
+          "BackgroundImage": "novel_bg2.png"
+        }
+      ]
+    },
+    {
+      "GroupId": "chapter_1---group_3",
+      "Type": "choice",
+      "Choices": [
+        {
+          "Text": "リンゴを買う",
+          "Next": { "NextGroupId": "chapter_1---group_4" }
+        },
+        {
+          "Text": "今日は見送る",
+          "Next": { "NextGroupId": "chapter_1---group_5" }
+        },
+        {
+          "Text": "自由に行動",
+          "PromptAddInfo": {
+            "Perspective ": "主人公",
+            "CurrentFlags": { "パンを買える": "true" },
+            "SceneStatus": "パンを買いに来たが、リンゴに心を奪われている",
+            "ActiveCharacters": ["主人公", "果物店店主"],
+            "AvailableCharacters": ["主人公の弟"],
+            "AvailableBackgroundImages": [
+              {
+                "BackgroundImage": "novel_bg1.png",
+                "BackgroundImageOverview": "市場の賑わい"
+              },
+              {
+                "BackgroundImage": "novel_bg2.png",
+                "BackgroundImageOverview": "果物店の軒先"
+              }
+            ],
+            "LLMSelectableChoices": [
+              {
+                "NextGroupId": "chapter_2_a---group_0",
+                "NextChapterRequirementFlags": { "パンを買える": "false" }
+              },
+              {
+                "NextGroupId": "chapter_2_b---group_0",
+                "NextChapterRequirementFlags": { "パンを買える": "true"}
+              }
+            ]
+          },
+          "Next": {
+            "NextGroupId": "chapter_1---group_3_free_custom",
+            "Process": "free_input"
+          }
+        }
+      ]
+    },
+    {
+      "GroupId": "chapter_1---group_4",
+      "Type": "text",
+      "ChangeFlags": { "パンを買える": "false" },
+      "Next": { "NextGroupId": "chapter_2_a---group_0" },
+      "Steps": [
+        {
+          "StepId": "step_1",
+          "Speaker": "主人公",
+          "Text": "「じゃあ、このリンゴを一つください」",
+          "BackgroundImage": "novel_bg2.png"
+        },
+        {
+          "StepId": "step_2",
+          "Speaker": "果物店店主",
+          "Text": "「ありがとう！ いつでも味見してみてね」",
+          "BackgroundImage": "novel_bg2.png"
+        },
+        {
+          "StepId": "step_3",
+          "Speaker": "narration",
+          "Text": "甘い香りが鼻をくすぐり、口に含むとみずみずしい果汁が弾けた。",
+          "BackgroundImage": "novel_bg2.png"
+        }
+      ]
+    },
+    {
+      "GroupId": "chapter_1---group_5",
+      "Type": "text",
+      "ChangeFlags": { "パンを買える": "true" },
+      "Next": { "NextGroupId": "chapter_2_b---group_0" },
+      "Steps": [
+        {
+          "StepId": "step_1",
+          "Speaker": "主人公",
+          "Text": "「今日はやめておこう…また今度ね」",
+          "BackgroundImage": "novel_bg2.png"
+        },
+        {
+          "StepId": "step_2",
+          "Speaker": "narration",
+          "Text": "リンゴの誘惑には勝ったが、ほんの少しだけ心残りがあった。",
+          "BackgroundImage": "novel_bg2.png"
+        }
+      ]
+    },
+    {
+      "GroupId": "chapter_1---group_6",
+      "Type": "text",
+      "ChangeFlags": { "パンを買える": "true" },
+      "Next": { "NextGroupId": "chapter_2_b---group_0" },
+      "Steps": [
+        {
+          "StepId": "step_1",
+          "Speaker": "主人公",
+          "Text": "「もう少し安くならないかな？」",
+          "BackgroundImage": "novel_bg2.png"
+        },
+        {
+          "StepId": "step_2",
+          "Speaker": "果物店店主",
+          "Text": "「うーん…特別に値引きしておくよ、今回はな！」",
+          "BackgroundImage": "novel_bg2.png"
+        },
+        {
+          "StepId": "step_3",
+          "Speaker": "主人公",
+          "Text": "「ありがとう！ それなら大満足だ」",
+          "BackgroundImage": "novel_bg2.png"
+        },
+        {
+          "StepId": "step_4",
+          "Speaker": "narration",
+          "Text": "交渉成功。お得な買い物に心が跳ねた。",
+          "BackgroundImage": "novel_bg2.png"
+        }
+      ]
+    }
+  ]
+}

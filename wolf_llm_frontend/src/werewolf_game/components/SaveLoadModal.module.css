@@ -1,0 +1,75 @@
+/* モーダル全体を覆う背景 */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* モーダル本体 */
+.modal {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  color: #111;
+}
+
+/* ヘッダー */
+.header {
+  margin-top: 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* セーブスロット一覧 */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  background: #f4f4f4;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.info {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* ボタン */
+.button {
+  margin-left: 0.5rem;
+  padding: 0.4em 1em;
+  font-size: 0.85rem;
+  background-color: #337ab7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.button:hover {
+  background-color: #286090;
+}
+.delete {
+  background-color: #d9534f;
+}
+.delete:hover {
+  background-color: #c9302c;
+}
