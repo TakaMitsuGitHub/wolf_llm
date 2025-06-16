@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./GameSelectorScreen.css";
-import { isAuthenticated, removeAuthToken, getUserInfo } from "./auth";
+// import { isAuthenticated, removeAuthToken, getUserInfo } from "./auth";
 // import { AUTH_API_BASE } from "./api";
 
 function GameSelectorScreen() {
@@ -12,7 +12,7 @@ function GameSelectorScreen() {
       <div className="selector-window">
         <h1>ゲーム選択</h1>
         <button onClick={() => navigate("/demo_novel_game")}>demo_novel_game</button>
-        <button onClick={() => navigate("/werewolf")}>開発中</button>
+        <button onClick={() => navigate("/werewolf_game")}>開発中</button>
       </div>
     </div>
   );

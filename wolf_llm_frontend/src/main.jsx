@@ -8,7 +8,6 @@ import GameSelectorScreen from "./common/GameSelectorScreen";
 import DemoNovelGameApp from "./demo_novel_game/App";
 import WerewolfGameApp from "./werewolf_game/App";
 import LoginScreen from "./common/LoginScreen";
-import ProtectedRoute from "./common/ProtectedRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,11 +16,7 @@ root.render(
       <Route path="/" element={<GameSelectorScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/demo_novel_game" element={<DemoNovelGameApp />} />
-      <Route path="/werewolf_game" element={
-        <ProtectedRoute>
-          <WerewolfGameApp />
-        </ProtectedRoute>
-      } />
+      <Route path="/werewolf_game" element={<WerewolfGameApp />} />
     </Routes>
   </BrowserRouter>
 );
