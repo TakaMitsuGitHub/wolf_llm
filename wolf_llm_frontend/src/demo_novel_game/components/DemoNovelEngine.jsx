@@ -1,7 +1,6 @@
-// src/demo_novel_game/components/DemoNovelEngine.jsx
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./DemoNovelEngine.css";
-import { API_BASE } from "../../common/api";
+import { API_BASE } from "../../config/api";
 import SaveLoadModal from "./SaveLoadModal";
 import LogModal from "./LogModal";
 import * as saveManager from "../save/saveManagerLocal";
@@ -13,9 +12,10 @@ export default function DemoNovelEngine({ initialSave = null }) {
 
   const [fontScale, setFontScale] = useState(1);
   const [chapterId, setChapterId] = useState("chapter_1");
-  const [groupId, setGroupId] = useState("chapter_1---group_1");
+  const [groupId, setGroupId] = useState("group_1");
   const [groupData, setGroupData] = useState(null);
   const [stepIndex, setStepIndex] = useState(0);
+  const [steps, setSteps] = useState([]);
   const [pendingStepId, setPendingStepId] = useState(null);
 
   const [bgImage, setBgImage] = useState("");
@@ -65,8 +65,7 @@ export default function DemoNovelEngine({ initialSave = null }) {
       return;
     }
 
-    // ステップオブジェクトそのままを保存
-    pushLog(step);
+    pushLog({ Speaker: step.Speaker, Text: step.Text });
   }, [stepIndex, groupData, setStepData, pushLog]);
 
   /* ★ セーブ復元 */
@@ -75,7 +74,8 @@ export default function DemoNovelEngine({ initialSave = null }) {
       skipLogRef.current = true;
       setGroupData(save.groupData);
       const idx = save.groupData.Steps.findIndex((s) => s.StepId === save.stepId);
-      setStepIndex(idx !== -1 ? idx : 0);
+      const resolved = idx !== -1 ? idx : 0;
+      setStepIndex(resolved);
       setLog(save.log ?? []);
       skipFetchRef.current = true;
       setChapterId(save.chapterId);
@@ -123,7 +123,7 @@ export default function DemoNovelEngine({ initialSave = null }) {
     fetch(`${API_BASE}/chapters/group/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ChapterId: chapterId, GroupId: groupId }),
+      body: JSON.stringify({ ChapterId: chapterId, GroupId: groupId })
     })
       .then((r) => r.json())
       .then((data) => {
@@ -151,9 +151,12 @@ export default function DemoNovelEngine({ initialSave = null }) {
       setStepIndex(next);
       return;
     }
-    const { NextGroupId } = groupData.Next ?? {};
+    const { NextGroupId, NextChapterId } = groupData.Next ?? {};
     if (NextGroupId) {
       setGroupId(NextGroupId);
+    } else if (NextChapterId) {
+      setChapterId(NextChapterId);
+      setGroupId("group_1");
     } else {
       alert("エンディング（次のグループがありません）");
     }
@@ -180,7 +183,7 @@ export default function DemoNovelEngine({ initialSave = null }) {
       alert("入力してください");
       return;
     }
-
+  
     try {
       const freeInputChoice = groupData?.Choices?.find(
         (c) => c.Next?.Process === "free_input"
@@ -189,7 +192,7 @@ export default function DemoNovelEngine({ initialSave = null }) {
 
       // 自動ログ追加を１回スキップさせる
       skipLogRef.current = true;
-
+  
       const res = await fetch(`${API_BASE}/llm/generate_group/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -202,18 +205,20 @@ export default function DemoNovelEngine({ initialSave = null }) {
           Log: log.slice(-10),
         }),
       });
-
+  
       if (!res.ok) throw new Error("LLM応答取得失敗");
-
+  
       const newGroup = await res.json();
-
+  
       setGroupData(newGroup);
+      setSteps(newGroup.Steps ?? []);
       setStepIndex(0);
       setIsFreeInputMode(false);
 
       // 明示的に一度だけログを追加
       if (newGroup.Steps?.length) {
-        pushLog(newGroup.Steps[0]);
+        const first = newGroup.Steps[0];
+        pushLog({ Speaker: first.Speaker, Text: first.Text });
       }
     } catch (e) {
       console.error(e);
@@ -230,7 +235,7 @@ export default function DemoNovelEngine({ initialSave = null }) {
       groupData,
       log,
       flags: {},
-      timestamp: Date.now(),
+      timestamp: Date.now()
     };
     saveManager.add(save);
     alert("セーブしました！");
@@ -243,7 +248,7 @@ export default function DemoNovelEngine({ initialSave = null }) {
         ref={gameRef}
         style={{
           "--font-scale": fontScale,
-          backgroundImage: `url(/images/${bgImage})`,
+          backgroundImage: `url(/images/${bgImage})`
         }}
         onClick={
           groupData?.Type === "text" &&
@@ -255,7 +260,9 @@ export default function DemoNovelEngine({ initialSave = null }) {
             : undefined
         }
       >
-        {charImageUrl && <img src={charImageUrl} alt="" className="char-image" />}
+        {charImageUrl && (
+          <img src={charImageUrl} alt="" className="char-image" />
+        )}
         <div className="novel-content">
           <p>
             <strong>{speaker}</strong>：{text}
@@ -263,7 +270,11 @@ export default function DemoNovelEngine({ initialSave = null }) {
           {groupData?.Type === "choice" && !isFreeInputMode && (
             <div className="choice-buttons">
               {groupData.Choices.map((c, i) => (
-                <button key={i} className="choice-button" onClick={() => handleChoice(c)}>
+                <button
+                  key={i}
+                  className="choice-button"
+                  onClick={() => handleChoice(c)}
+                >
                   {c.Text}
                 </button>
               ))}
@@ -272,7 +283,10 @@ export default function DemoNovelEngine({ initialSave = null }) {
           {isFreeInputMode && (
             <div className="free-input">
               <p>主人公の行動を入力してください：</p>
-              <input value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+              <input
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+              />
               <button onClick={handleInputSubmit}>送信</button>
             </div>
           )}
@@ -286,12 +300,24 @@ export default function DemoNovelEngine({ initialSave = null }) {
       </div>
 
       {isSaveOpen && (
-        <SaveLoadModal mode="save" saveManager={saveManager} onSave={handleSave} onClose={() => setIsSaveOpen(false)} />
+        <SaveLoadModal
+          mode="save"
+          saveManager={saveManager}
+          onSave={handleSave}
+          onClose={() => setIsSaveOpen(false)}
+        />
       )}
       {isLoadOpen && (
-        <SaveLoadModal mode="load" saveManager={saveManager} onLoad={applySave} onClose={() => setIsLoadOpen(false)} />
+        <SaveLoadModal
+          mode="load"
+          saveManager={saveManager}
+          onLoad={applySave}
+          onClose={() => setIsLoadOpen(false)}
+        />
       )}
-      {isLogOpen && <LogModal log={log} onClose={() => setIsLogOpen(false)} />}
+      {isLogOpen && (
+        <LogModal log={log} onClose={() => setIsLogOpen(false)} />
+      )}
     </div>
   );
 }

@@ -1,7 +1,14 @@
-// src/demo_novel_game/components/SaveLoadModal.jsx
 import React, { useState, useEffect } from "react";
-import styles from "./SaveLoadModal.module.css";
+import "./SaveLoadModal.css";
 
+/**
+ * props
+ *   mode        "save" | "load"
+ *   saveManager localStorage 保存ユーティリティ
+ *   onSave      現在の状態をセーブするコールバック
+ *   onLoad      選択したデータでロードするコールバック
+ *   onClose     モーダルを閉じる
+ */
 export default function SaveLoadModal({
   mode = "load",
   saveManager,
@@ -11,56 +18,48 @@ export default function SaveLoadModal({
 }) {
   const [saves, setSaves] = useState([]);
 
+  /* saveManager が変わったときも再読込する */
   useEffect(() => {
     setSaves(saveManager.loadAll());
   }, [saveManager]);
 
+  const handleDelete = (idx) => {
+    saveManager.remove(idx);
+    setSaves(saveManager.loadAll());
+  };
+
+  const handleLoad = (idx) => {
+    onLoad(saves[idx]);
+    onClose();
+  };
+
   return (
-    <div className={styles.backdrop}>
-      <div className={styles.modal}>
-        <h2 className={styles.header}>
-          {mode === "save" ? "セーブ画面" : "ロード画面"}
-        </h2>
+    <div className="modal-backdrop">
+      <div className="modal">
+        <h2>{mode === "save" ? "セーブ画面" : "ロード画面"}</h2>
 
         {mode === "save" && (
-          <button className={styles.button} onClick={onSave}>
-            現在の状態をセーブ
-          </button>
+          <button onClick={onSave}>現在の状態をセーブ</button>
         )}
 
         {saves.length === 0 && <p>保存データがありません</p>}
 
-        <ul className={styles.list}>
+        <ul>
           {saves.map((save, idx) => (
-            <li key={idx} className={styles.listItem}>
-              <span className={styles.info}>
+            <li key={idx}>
+              <span>
                 {new Date(save.timestamp).toLocaleString()} /{" "}
                 {save.chapterId} / {save.groupId}
               </span>
               {mode === "load" && (
-                <button
-                  className={styles.button}
-                  onClick={() => onLoad(saves[idx])}
-                >
-                  ロード
-                </button>
+                <button onClick={() => handleLoad(idx)}>ロード</button>
               )}
-              <button
-                className={`${styles.button} ${styles.delete}`}
-                onClick={() => {
-                  saveManager.remove(idx);
-                  setSaves(saveManager.loadAll());
-                }}
-              >
-                削除
-              </button>
+              <button onClick={() => handleDelete(idx)}>削除</button>
             </li>
           ))}
         </ul>
 
-        <button className={styles.button} onClick={onClose}>
-          閉じる
-        </button>
+        <button onClick={onClose}>閉じる</button>
       </div>
     </div>
   );

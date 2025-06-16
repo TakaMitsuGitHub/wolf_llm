@@ -10,14 +10,14 @@ from demo_novel_game.scenario.scenario_llm import scenario_craeted
 
 class ChapterGroupView(APIView):
     def post(self, request):
+
         print(f"request : {request}")
-        # chapter_id = request.data.get("ChapterId")
+        chapter_id = request.data.get("ChapterId")
         group_id = request.data.get("GroupId")
-        chapter_id = group_id.split("---")[0]
 
         print(f"【API呼び出し】chapter: {chapter_id}, group: {group_id}")
 
-        base_path = os.path.join("demo_novel_game", "data", "chapters")
+        base_path = os.path.join("data", "chapters")
         file_path = os.path.join(base_path, f"{chapter_id}.json")
 
         try:

@@ -7,14 +7,14 @@ def schema_dict_created():
             "ChangeFlags": {
                 "type": "object",
                 "properties": {},
-                "additionalProperties": {"type": "string"}
+                "additionalProperties": {"type": "boolean"}
             },
             "Next": {
                 "type": "object",
                 "properties": {
-                    "NextGroupId": {"type": "string"},
+                    "NextChapterId": {"type": "string"},
                 },
-                "required": ["NextGroupId"],
+                "required": ["NextChapterId"],
                 "additionalProperties": False
             },
             "Steps": {

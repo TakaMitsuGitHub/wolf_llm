@@ -4,7 +4,7 @@
   "RequirementFlags": { "パンを買える": false },
   "Groups": [
     {
-      "GroupId": "chapter_2_a---group_0",
+      "GroupId": "group_1",
       "Type": "text",
       "ChangeFlags": {},
       "Next": {},

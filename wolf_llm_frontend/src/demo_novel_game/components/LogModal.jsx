@@ -1,4 +1,3 @@
-// src/demo_novel_game/components/LogModal.jsx
 import "./LogModal.css";
 
 export default function LogModal({ log, onClose }) {

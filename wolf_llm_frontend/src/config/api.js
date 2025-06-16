@@ -1,0 +1,1 @@
+export const API_BASE = "http://localhost:8000/demo_novel_game/api";

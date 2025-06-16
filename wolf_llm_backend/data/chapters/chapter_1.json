@@ -5,10 +5,10 @@
   "RequirementFlags": {},
   "Groups": [
     {
-      "GroupId": "chapter_1---group_1",
+      "GroupId": "group_1",
       "Type": "text",
-      "ChangeFlags": { "パンを買える": "true" },
-      "Next": { "NextGroupId": "chapter_1---group_2" },
+      "ChangeFlags": { "パンを買える": true },
+      "Next": { "NextGroupId": "group_2" },
       "Steps": [
         {
           "StepId": "step_1",
@@ -25,10 +25,10 @@
       ]
     },
     {
-      "GroupId": "chapter_1---group_2",
+      "GroupId": "group_2",
       "Type": "text",
       "ChangeFlags": {},
-      "Next": { "NextGroupId": "chapter_1---group_3" },
+      "Next": { "NextGroupId": "group_3" },
       "Steps": [
         {
           "StepId": "step_1",
@@ -39,22 +39,21 @@
       ]
     },
     {
-      "GroupId": "chapter_1---group_3",
+      "GroupId": "group_3",
       "Type": "choice",
       "Choices": [
         {
           "Text": "リンゴを買う",
-          "Next": { "NextGroupId": "chapter_1---group_4" }
+          "Next": { "NextGroupId": "group_4" }
         },
         {
           "Text": "今日は見送る",
-          "Next": { "NextGroupId": "chapter_1---group_5" }
+          "Next": { "NextGroupId": "group_5" }
         },
         {
           "Text": "自由に行動",
           "PromptAddInfo": {
-            "Perspective ": "主人公",
-            "CurrentFlags": { "パンを買える": "true" },
+            "CurrentFlags": { "パンを買える": true },
             "SceneStatus": "パンを買いに来たが、リンゴに心を奪われている",
             "ActiveCharacters": ["主人公", "果物店店主"],
             "AvailableCharacters": ["主人公の弟"],
@@ -70,27 +69,31 @@
             ],
             "LLMSelectableChoices": [
               {
-                "NextGroupId": "chapter_2_a---group_0",
-                "NextChapterRequirementFlags": { "パンを買える": "false" }
+                "NextChapterId": "chapter_2_a",
+                "NextGroupId": "group_0",
+                "NextChapterRequirementFlags": { "パンを買える": false },
+                "NextChapterOverview": "パン屋に到着するが主人公のお金が足りず目的のパンが買えない"
               },
               {
-                "NextGroupId": "chapter_2_b---group_0",
-                "NextChapterRequirementFlags": { "パンを買える": "true"}
+                "NextChapterId": "chapter_2_b",
+                "NextGroupId": "group_0",
+                "NextChapterRequirementFlags": { "パンを買える": true, "aaa": true },
+                "NextChapterOverview": "パン屋で主人公は問題なくパンを買う"
               }
             ]
           },
           "Next": {
-            "NextGroupId": "chapter_1---group_3_free_custom",
+            "NextGroupId": "group_3_free_custom",
             "Process": "free_input"
           }
         }
       ]
     },
     {
-      "GroupId": "chapter_1---group_4",
+      "GroupId": "group_4",
       "Type": "text",
-      "ChangeFlags": { "パンを買える": "false" },
-      "Next": { "NextGroupId": "chapter_2_a---group_0" },
+      "ChangeFlags": { "パンを買える": false },
+      "Next": { "NextChapterId": "chapter_2_a" },
       "Steps": [
         {
           "StepId": "step_1",
@@ -113,10 +116,10 @@
       ]
     },
     {
-      "GroupId": "chapter_1---group_5",
+      "GroupId": "group_5",
       "Type": "text",
-      "ChangeFlags": { "パンを買える": "true" },
-      "Next": { "NextGroupId": "chapter_2_b---group_0" },
+      "ChangeFlags": { "パンを買える": true },
+      "Next": { "NextChapterId": "chapter_2_b" },
       "Steps": [
         {
           "StepId": "step_1",
@@ -133,10 +136,10 @@
       ]
     },
     {
-      "GroupId": "chapter_1---group_6",
+      "GroupId": "group_6",
       "Type": "text",
-      "ChangeFlags": { "パンを買える": "true" },
-      "Next": { "NextGroupId": "chapter_2_b---group_0" },
+      "ChangeFlags": { "パンを買える": true },
+      "Next": { "NextChapterId": "chapter_2_b" },
       "Steps": [
         {
           "StepId": "step_1",

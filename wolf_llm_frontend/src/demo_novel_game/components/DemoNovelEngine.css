@@ -48,20 +48,16 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
-  color: red;
 }
 
 .choice-button {
   padding: 0.75em 2em;
   font-size: calc(16px * var(--font-scale));
-  background: rgba(30, 30, 30, 0.9);    /* ダークグレー背景 */
-  color: #fff;                          /* 文字色を白に */
-  border: 2px solid #fff;               /* 白い縁取りで際立たせる */
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .choice-button:hover {

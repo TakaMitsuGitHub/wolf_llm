@@ -2,6 +2,11 @@ import React, { useRef, useEffect, useState } from "react";
 import bg1 from "../../assets/images/demo_menu_bg.png";
 import "./MenuScreen.css";
 
+/**
+ * props
+ *   onNewGame   … ニューゲーム開始
+ *   onContinue  … ロード用モーダルを開く   ★追加
+ */
 function MenuScreen({ onNewGame, onContinue }) {
   const gameRef = useRef(null);
   const [fontScale, setFontScale] = useState(1);
@@ -18,23 +23,23 @@ function MenuScreen({ onNewGame, onContinue }) {
   }, []);
 
   return (
-    <div className="demo-menu-container">
+    <div className="menu-container">
       <div
-        className="demo-game-window"
+        className="game-window"
         ref={gameRef}
         style={{
           "--font-scale": fontScale,
           backgroundImage: `url(${bg1})`,
         }}
       >
-        <div className="demo-menu-box">
-          <h1 className="demo-menu-title">ビジュアルノベルゲーム</h1>
-          <button className="demo-menu-button" onClick={onNewGame}>
-            ニューゲーム
-          </button>
-          <button className="demo-menu-button" onClick={onContinue}>
-            コンティニュー
-          </button>
+        <div className="menu-content">
+          <h1>ビジュアルノベルゲーム</h1>
+
+          {/* ニューゲーム */}
+          <button onClick={onNewGame}>ニューゲーム</button>
+
+          {/* コンティニュー → ロードモーダルを開く */}
+          <button onClick={onContinue}>コンティニュー</button>
         </div>
       </div>
     </div>

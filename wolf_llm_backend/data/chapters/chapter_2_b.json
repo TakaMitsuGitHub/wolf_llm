@@ -1,10 +1,10 @@
 {
   "ChapterId": "chapter_2_b",
   "Title": "後編：幸せの一口",
-  "RequirementFlags": { "パンを買える": true},
+  "RequirementFlags": { "パンを買える": true, "aaa": true },
   "Groups": [
     {
-      "GroupId": "chapter_2_b---group_0",
+      "GroupId": "group_1",
       "Type": "text",
       "ChangeFlags": { "aaa": true, "bbb": false },
       "Next": {},
