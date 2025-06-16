@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import WerewolfEngine from "./components/WerewolfEngine";
 import MenuScreen from "./components/MenuScreen";
-import { getUserInfo } from "../common/auth";
 import SaveLoadModal from "../demo_novel_game/components/SaveLoadModal"; // 共通コンポーネントを再利用
 
 function WerewolfGameApp() {
   const [view, setView] = useState("menu"); // menu, game
   const [saveLoadModalOpen, setSaveLoadModalOpen] = useState(false);
   const [gameState, setGameState] = useState(null);
-  const user = getUserInfo();
 
   const handleNewGame = () => {
     setGameState({
-      playerName: user?.full_name || "プレイヤー",
+      playerName: "プレイヤー",
     });
     setView("game");
   };
