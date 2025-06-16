@@ -5,9 +5,12 @@ import os
 import json
 from uuid import uuid4
 import traceback
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 from demo_novel_game.scenario.scenario_llm import scenario_craeted
 
+@method_decorator(csrf_exempt, name='dispatch')
 class ChapterGroupView(APIView):
     def post(self, request):
 
